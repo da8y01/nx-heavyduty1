@@ -18,12 +18,22 @@ import { ShyftApiService } from './shyft-api.service';
         <hd-wallet-multi-button></hd-wallet-multi-button>
       </div>
 
-      @if (account()) {
-        <div class="absolute top-4 left-4 flex justify-center items-center gap-2">
-          <img [src]="account()?.info?.image" class="w-8 h-8">
-          <p class="text-xl">{{ account()?.balance }}</p>
-        </div>
-      }
+      <section class="mb-8 mt-8">
+        @if (account()) {
+          <div class="top-4 left-4 flex justify-center items-center gap-2 mb-4">
+            <img [src]="account()?.info?.image" class="w-8 h-8">
+            <p class="text-xl">{{ account()?.balance }}</p>
+          </div>
+        }
+
+        @if (accountTransactionHistory()) {
+          <div class="top-4 left-4 flex justify-center items-center gap-2">
+            <p class="text-lg">{{ accountTransactionHistory()?.message }} | </p>
+            <p class="text-lg">{{ accountTransactionHistory()?.result }} | </p>
+            <p class="text-lg">{{ accountTransactionHistory()?.success }}</p>
+          </div>
+        }
+      </section>
 
       <nav>
         <ul class="flex justify-center items-center gap-4">
@@ -49,6 +59,11 @@ export class AppComponent {
 
   readonly account = computedAsync(
     () => this._shyftApiService.getAccount(this._publicKey()?.toBase58()),
+    { requireSync: true }
+  );
+
+  readonly accountTransactionHistory = computedAsync(
+    () => this._shyftApiService.getAccountTransactionHistory(this._publicKey()?.toBase58()),
     { requireSync: true }
   );
 }

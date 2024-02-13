@@ -22,4 +22,17 @@ export class ShyftApiService {
     return this._httpClient.get<{ result: { balance: number, info: { image: string } } }>(url.toString(), { headers: this._header })
       .pipe(map(response => response.result));
   }
+
+  getAccountTransactionHistory(publicKey: string | undefined | null) {
+    if (!publicKey) {
+      return of(null);
+    }
+
+    const url = new URL('https://api.shyft.to/sol/v1/wallet/transaction_history');
+    url.searchParams.set('network', 'mainnet-beta');
+    url.searchParams.set('wallet', publicKey);
+
+    return this._httpClient.get<{ message: string, result: [], success: boolean }>(url.toString(), { headers: this._header })
+      .pipe(map(response => response));
+  }
 }
