@@ -14,7 +14,7 @@ export class ShyftApiService {
       return of(null);
     }
 
-    const url = new URL('https://api.shyft.to/sol/v1/wallet/token_balance');
+    const url = new URL('http://localhost:3000/shyft1');
     url.searchParams.set('network', 'mainnet-beta');
     url.searchParams.set('wallet', publicKey);
     url.searchParams.set('token', this._mint);
@@ -28,7 +28,7 @@ export class ShyftApiService {
       return of(null);
     }
 
-    const url = new URL('https://api.shyft.to/sol/v1/wallet/transaction_history');
+    const url = new URL('http://localhost:3000/shyft1history');
     url.searchParams.set('network', 'mainnet-beta');
     url.searchParams.set('wallet', publicKey);
 
