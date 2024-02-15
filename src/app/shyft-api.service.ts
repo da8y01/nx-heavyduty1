@@ -5,9 +5,8 @@ import { map, of } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class ShyftApiService {
     private readonly _httpClient = inject(HttpClient);
-    private readonly _header = { 'x-api-key': '0123abcd' };
-    // private readonly _mint = 'sillydragon'; // silly dragon
-    private readonly _mint = 'solana'; // solana
+    private readonly _header = { 'x-api-key': 'apikey0123' };
+    private readonly _mint = 'mint0123';
 
   getAccount(publicKey: string | undefined | null) {
     if (!publicKey) {
@@ -23,9 +22,9 @@ export class ShyftApiService {
       .pipe(map(response => response.result));
   }
 
-  getAccountTransactionHistory(publicKey: string | undefined | null) {
+  getTransactions(publicKey: string | undefined | null) {
     if (!publicKey) {
-      return of(null);
+      return null;
     }
 
     const url = new URL('http://localhost:3000/shyft1history');
@@ -33,6 +32,6 @@ export class ShyftApiService {
     url.searchParams.set('wallet', publicKey);
 
     return this._httpClient.get<{ message: string, result: [], success: boolean }>(url.toString(), { headers: this._header })
-      .pipe(map(response => response));
+      .pipe(map(response => response.result))
   }
 }

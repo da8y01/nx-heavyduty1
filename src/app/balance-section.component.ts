@@ -6,9 +6,10 @@ import { WalletStore } from '@heavy-duty/wallet-adapter';
 
 @Component({
   selector: 'nx-heavyduty1-balance-section',
+  standalone: true,
   template: `
     <section>
-      <h2 class="text-lg">Balance</h2>
+      <h2 class="text-lg">Saldo</h2>
       @if (account()) {
         <div class="flex gap-2">
           <img [src]="account()?.info?.image" class="w-8 h-8" />
@@ -16,8 +17,7 @@ import { WalletStore } from '@heavy-duty/wallet-adapter';
         </div>
       }
     </section>
-  `,
-  standalone: true
+  `
 })
 
 export class BalanceSectionComponent {
