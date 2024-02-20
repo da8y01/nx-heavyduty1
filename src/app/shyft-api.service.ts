@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable, inject } from '@angular/core'
 import { map, of } from 'rxjs';
+import { environment } from '../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class ShyftApiService {
     private readonly _httpClient = inject(HttpClient);
-    private readonly _header = { 'x-api-key': 'apikey0123' };
+    private readonly _header = { 'x-api-key': environment.shyftApiKey };
     // private readonly _mint = 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v'; // solana
     private readonly _mint = '7EYnhQoR9YM3N7UoaKRoA44Uy8JeaZV3qyouov87awMs'; // silly dragon
 
