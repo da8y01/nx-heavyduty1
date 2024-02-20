@@ -40,10 +40,6 @@ import { MatTableModule } from '@angular/material/table';
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-
-      <div class="text-lg">Data:
-        <p>{{ transactions() | json }}</p>
-      </div>
     </section>
   `
 })
