@@ -6,14 +6,15 @@ import { map, of } from 'rxjs';
 export class ShyftApiService {
     private readonly _httpClient = inject(HttpClient);
     private readonly _header = { 'x-api-key': 'apikey0123' };
-    private readonly _mint = 'mint0123';
+    // private readonly _mint = 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v'; // solana
+    private readonly _mint = '7EYnhQoR9YM3N7UoaKRoA44Uy8JeaZV3qyouov87awMs'; // silly dragon
 
   getAccount(publicKey: string | undefined | null) {
     if (!publicKey) {
       return of(null);
     }
 
-    const url = new URL('http://localhost:3000/shyft1');
+    const url = new URL('https://api.shyft.to/sol/v1/wallet/token_balance');
     url.searchParams.set('network', 'mainnet-beta');
     url.searchParams.set('wallet', publicKey);
     url.searchParams.set('token', this._mint);
@@ -27,9 +28,10 @@ export class ShyftApiService {
       return null;
     }
 
-    const url = new URL('http://localhost:3000/shyft1history');
+    const url = new URL('https://api.shyft.to/sol/v1/transaction/history');
     url.searchParams.set('network', 'mainnet-beta');
-    url.searchParams.set('wallet', publicKey);
+    url.searchParams.set('account', publicKey);
+    url.searchParams.set('tx_num', '3');
 
     return this._httpClient.get<{ message: string, result: [], success: boolean }>(url.toString(), { headers: this._header })
       .pipe(map(response => response.result))

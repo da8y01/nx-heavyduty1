@@ -19,28 +19,22 @@ import { MatTableModule } from '@angular/material/table';
         <!--- Note that these columns can be defined in any order.
               The actual rendered columns are set as a property on the row definition" -->
 
-        <!-- Date Column -->
-        <ng-container matColumnDef="date">
-          <th mat-header-cell *matHeaderCellDef> Fecha </th>
-          <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+        <!-- Type Column -->
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef> Tipo </th>
+          <td mat-cell *matCellDef="let element"> {{element.type}} </td>
         </ng-container>
 
-        <!-- Amount Column -->
-        <ng-container matColumnDef="amount">
-          <th mat-header-cell *matHeaderCellDef> Monto </th>
-          <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+        <!-- Timestamp Column -->
+        <ng-container matColumnDef="timestamp">
+          <th mat-header-cell *matHeaderCellDef> Fecha-Hora </th>
+          <td mat-cell *matCellDef="let element"> {{element.timestamp}} </td>
         </ng-container>
 
-        <!-- Destination Column -->
-        <ng-container matColumnDef="destination">
-          <th mat-header-cell *matHeaderCellDef> Destinatario </th>
-          <td mat-cell *matCellDef="let element"> {{element.destination}} </td>
-        </ng-container>
-
-        <!-- Source Column -->
-        <ng-container matColumnDef="source">
-          <th mat-header-cell *matHeaderCellDef> Emisor </th>
-          <td mat-cell *matCellDef="let element"> {{element.source}} </td>
+        <!-- Status Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef> Estado </th>
+          <td mat-cell *matCellDef="let element"> {{element.status}} </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -55,7 +49,7 @@ import { MatTableModule } from '@angular/material/table';
 })
 
 export class TransactionsSectionComponent {
-  displayedColumns: string[] = ['date', 'amount', 'destination', 'source'];
+  displayedColumns: string[] = ['type', 'timestamp', 'status'];
 
   private readonly _shyftApiService = inject(ShyftApiService);
   private readonly _walletStore = inject(WalletStore);
