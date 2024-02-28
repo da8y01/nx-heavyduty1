@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatAnchor } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
+import { ConnectionStore } from '@heavy-duty/wallet-adapter';
 import { HdWalletMultiButtonComponent } from '@heavy-duty/wallet-adapter-material';
+import { ShyftApiService } from './shyft-api.service';
 
 @Component({
   standalone: true,
@@ -35,4 +37,11 @@ import { HdWalletMultiButtonComponent } from '@heavy-duty/wallet-adapter-materia
     </main>
   `,
 })
-export class AppComponent {}
+export class AppComponent implements OnInit {
+  private readonly _shyftApiService = inject(ShyftApiService)
+  private readonly _connectionStore = inject(ConnectionStore)
+
+  ngOnInit(): void {
+    this._connectionStore.setEndpoint(this._shyftApiService.getEndpoint())
+  }
+}
