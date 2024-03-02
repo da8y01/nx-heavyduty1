@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  shyftApiUrl: 'https://api.shyft.to',
+  shyftRpcUrl: 'https://rpc.shyft.to',
+  shyftApiUrl: 'http://localhost:3000',
   shyftApiKey: import.meta.env.NG_APP_SHYFT_API_KEY,
   mintToken: '7EYnhQoR9YM3N7UoaKRoA44Uy8JeaZV3qyouov87awMs',
   walletNetwork: 'devnet'

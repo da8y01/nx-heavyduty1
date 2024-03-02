@@ -12,7 +12,7 @@ export class ShyftApiService {
 
 
   getEndpoint() {
-    const url = new URL('https://rpc.shyft.to');
+    const url = new URL(environment.shyftRpcUrl);
 
     url.searchParams.set('api_key', environment.shyftApiKey);
 
@@ -24,7 +24,7 @@ export class ShyftApiService {
       return of(null);
     }
 
-    const url = new URL('https://api.shyft.to/sol/v1/wallet/token_balance');
+    const url = new URL(`${environment.shyftApiUrl}/sol/v1/wallet/token_balance`);
     url.searchParams.set('network', 'mainnet-beta');
     url.searchParams.set('wallet', publicKey);
     url.searchParams.set('token', this._mint);
@@ -38,7 +38,7 @@ export class ShyftApiService {
       return null;
     }
 
-    const url = new URL('https://api.shyft.to/sol/v1/transaction/history');
+    const url = new URL(`${environment.shyftApiUrl}/sol/v1/transaction/history`);
     url.searchParams.set('network', 'mainnet-beta');
     url.searchParams.set('account', publicKey);
     url.searchParams.set('tx_num', '3');
@@ -52,7 +52,7 @@ export class ShyftApiService {
       return of(null);
     }
 
-    const url = new URL('https://api.shyft.to/sol/v1/wallet/all_tokens');
+    const url = new URL(`${environment.shyftApiUrl}/sol/v1/wallet/all_tokens`);
     url.searchParams.set('network', 'mainnet-beta');
     url.searchParams.set('wallet', publicKey);
 

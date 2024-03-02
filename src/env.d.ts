@@ -9,6 +9,7 @@ interface ImportMetaEnv {
    */
   readonly NODE_ENV: string;
   // Add your environment variables below
+  readonly NG_APP_SHYFT_RPC_URL: string;
   readonly NG_APP_SHYFT_API_URL: string;
   readonly NG_APP_SHYFT_API_KEY: string;
   readonly NG_APP_MINT_TOKEN: string;
