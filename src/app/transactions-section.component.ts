@@ -1,10 +1,9 @@
 import {CommonModule} from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { computedAsync } from 'ngxtension/computed-async';
-import { ShyftApiService } from './shyft-api.service';
-import { WalletStore } from '@heavy-duty/wallet-adapter';
 import { MatTableModule } from '@angular/material/table';
+import { injectPublicKey } from '@heavy-duty/wallet-adapter';
+import { ShyftApiService } from './shyft-api.service';
 
 @Component({
   selector: 'nx-heavyduty1-transactions-section',
@@ -48,8 +47,8 @@ export class TransactionsSectionComponent {
   displayedColumns: string[] = ['type', 'timestamp', 'status'];
 
   private readonly _shyftApiService = inject(ShyftApiService);
-  private readonly _walletStore = inject(WalletStore);
-  private readonly _publicKey = toSignal(this._walletStore.publicKey$);
+  private readonly _publicKey = injectPublicKey();
+
 
   readonly transactions = computedAsync(
     () => this._shyftApiService.getTransactions(this._publicKey()?.toBase58()),
